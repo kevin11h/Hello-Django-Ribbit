@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from django.forms import ModelForm
 from django.utils.html import strip_tags
 from ribbit_app.models import Ribbit
 
@@ -34,7 +35,7 @@ class AuthenticateForm(AuthenticationForm):
 				self.fields[f].widget.attrs.update({'class': 'error', 'value': strip_tags(error)})
 			return form
 
-class RibbitForm(forms.ModelForm):
+class RibbitForm(ModelForm):
 	content = forms.CharField(required=True, widget=forms.widgets.Textarea(attrs={'class': 'ribbitText'}))
 
 	def is_valid(self):
@@ -45,6 +46,6 @@ class RibbitForm(forms.ModelForm):
 
 		return form
 
-		class meta:
-			model = Ribbit
-			exclude = ('user',)
+	class Meta:
+		model = Ribbit
+		exclude = ('user',)
