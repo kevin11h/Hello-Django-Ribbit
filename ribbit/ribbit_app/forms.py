@@ -4,7 +4,7 @@ from django import forms
 from django.utils.html import strip_tags
 from ribbit_app.models import Ribbit
 
-class UserCreateFO=orm(UserCreationForm):
+class UserCreateForm(UserCreationForm):
 	email = forms.EmailField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': 'Email'}))
 	first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': 'First Name'}))
 	last_name  = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': 'Last Name'}))	
@@ -35,7 +35,7 @@ class AuthenticateForm(AuthenticationForm):
 			return form
 
 class RibbitForm(forms.ModelForm):
-	content = forms.CharField(required=True, widget =forms.widgets.TextArea(attrs={'class': 'ribbitText'}))
+	content = forms.CharField(required=True, widget=forms.widgets.Textarea(attrs={'class': 'ribbitText'}))
 
 	def is_valid(self):
 		form = super(RibbitForm, self).is_valid()
